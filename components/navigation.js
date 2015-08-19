@@ -1,6 +1,8 @@
 import React from 'react';
 import page  from 'page';
 
+import Dropdown from './dropdown';
+
 export default React.createClass({
 	propTypes: {
 		view: React.PropTypes.string
@@ -24,8 +26,8 @@ export default React.createClass({
 		let links = [];
 		for (let key in items) {
 			links.push(
-				<li className='dropdown-link'
-					onClick = {this.toggleDropdown(key)}>
+				<li key={key} id={key} className='dropdown-link'
+					onClick={(event) => {if(event)this.toggleDropdown(key)} }>
 						{key}
 				</li>
 			)
@@ -39,26 +41,26 @@ export default React.createClass({
 
 	render() {
 		let items = {
-			works : {
-				php : {
+			works : [
+				{
 					title:   'php-application bundle',
 					onClick: () => { page.show('works/php') }
 				},
-				java : {
+				{
 					title:   'java-application',
 					onClick: () => { page.show('works/java') }
 				}
-			},
-			about : {
-				php : {
+			],
+			about : [
+				{
 					title:   'php-application bundle',
 					onClick: () => { page.show('works/php') }
 				},
-				java : {
+				{
 					title:   'java-application',
 					onClick: () => { page.show('works/java') }
 				}
-			}
+			]
 		}
 		let dropdown = this.state.dropDown ?
 			<Dropdown
