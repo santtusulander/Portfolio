@@ -3,15 +3,14 @@ import page  from 'page';
 
 export default React.createClass({
 	propTypes: {
-		invoker: React.PropTypes.string,
 		items:   React.PropTypes.array
 	},
 
 	renderItems() {
+		console.log(this.props.items)
 		return this.props.items.map((item, index) => {
-			console.dir(item, index)
 			return (
-				<li key={index} className='dropdown-item' onClick = {item.onClick}>
+				<li key={index} className='dropdown-item' onClick={item.onClick}>
 					{item.title}
 				</li>
 			);
