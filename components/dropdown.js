@@ -7,7 +7,6 @@ export default React.createClass({
 	},
 
 	renderItems() {
-		console.log(this.props.items)
 		return this.props.items.map((item, index) => {
 			return (
 				<li key={index} className='dropdown-item' onClick={item.onClick}>
