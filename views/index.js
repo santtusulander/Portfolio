@@ -4,14 +4,34 @@ import page  from 'page';
 import Navigation from '../components/navigation';
 import Carousel   from '../components/carousel';
 
-let slides=[
-	<div className='slide'>jaa</div>,
-	<div className='slide'>juu</div>
-];
-
 export default React.createClass({
 
 	render(){
+		let slides=[
+			{
+				className: 'slide',
+				content: 'juu',
+				style: {
+
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'ei',
+				style: {
+
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'jaa',
+				style: {
+
+				}
+			}
+		]
 		return (
 			<div>
 				<Navigation view='index'/>

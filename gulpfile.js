@@ -50,6 +50,7 @@ gulp.task('build-js', bundle);
 gulp.task('build-css', function () {
   return gulp.src('./styles/app.scss')
     .pipe(sass({
+    	includePaths: require('node-bourbon').includePaths,
     	indentedSyntax: true,
     	errLogToConsole: true
     }).on('error', sass.logError))
