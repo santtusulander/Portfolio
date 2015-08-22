@@ -2,6 +2,10 @@ import flux from '../flux';
 
 export default flux.actions({
 	Carousel: {
-		Move: null
+		MoveTo: null,
+		Move:   null
+	},
+	Slide: {
+		SetSlide: null
 	}
 });

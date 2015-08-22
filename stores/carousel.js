@@ -4,15 +4,18 @@ import Action from '../actions';
 /**
  *
  */
-let slide = null
+let item = null;
 export default flux.store({
-	getSlide() {
-		return slide
+	getItem() {
+		return item
 	},
 
 	handlers: {
-		[Action.Carousel.Move](payload) {
-			slide = payload
+		[Action.Carousel.MoveTo](index) {
+			item = index
+		},
+		[Action.Carousel.Move](direction) {
+			item = direction
 		}
 	}
 });

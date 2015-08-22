@@ -1,6 +1,9 @@
 import React       from 'react';
 import page        from 'page';
 import tweenState  from 'react-tween-state';
+import classnames  from 'classnames';
+
+import SlideStore  from '../stores/slide';
 
 import CarouselAction from '../actions/carousel' 
 
@@ -14,7 +17,7 @@ export default React.createClass({
 	},
 
 	getInitialState() {
-		return {left: 0, wrapperHeight: 0};
+		return { left: 0, wrapperHeight: 0, currentSlide: 0 };
 	},
 
 	renderSlides() {
@@ -22,18 +25,28 @@ export default React.createClass({
 			return (
 				<Slide ref='slide' index={index} key={index} slide={item}/>
 			)
-		})
+		});
 	},
 
 	componentDidMount() {
-		console.log(React.findDOMNode(this.refs.slide).style.left)
+		SlideStore.addChangeListener(() => {
+			if(this.state.currentSlide !== SlideStore.getSlide().index) {
+				this.setState({
+					currentSlide: SlideStore.getSlide().index
+				});
+			}
+		});
 		this.setState({
 			wrapperHeight: React.findDOMNode(this.refs.slide).offsetHeight
 		});
 	},
 
+	move(direction) {
+		CarouselAction.moveCarousel(direction)
+	},
+
 	goToSlide(index) {
-		CarouselAction.moveSlide(index);
+		CarouselAction.moveToSlide(index);
 	},
 
 	//This is so hacky it's almost revolting. But since with the current setup
@@ -42,17 +55,33 @@ export default React.createClass({
 	renderNavigation(){
 		let wrapperStyle = {
 			paddingTop: `${this.state.wrapperHeight + 2}px` 
-		}
+		};
+		let nextClasses = classnames({
+			nextprev: true,
+			hidden: this.state.currentSlide === this.props.slides.length - 1
+		});
+		let prevClasses = classnames({
+			nextprev: true,
+			hidden: this.state.currentSlide === 0
+		});
 		return (
 			<section className='navigation-wrapper' style={wrapperStyle}>
-			{this.props.slides.map((item, index) => {
-				return (
-					<section key={index} className='carousel-navigator'
-						onClick={(event) => {if(event)this.goToSlide(index)}}>
-						asdsad
-					</section>
-				)
-			})}
+				<section onClick={(event) => {if(event)this.move('next')}}
+					className={nextClasses}>
+					next
+				</section>
+				<section onClick={(event) => {if(event)this.move('prev')}}
+					className={prevClasses}>
+					previous
+				</section>
+				{this.props.slides.map((item, index) => {
+					return (
+						<section key={index} className='carousel-navigator'
+							onClick={(event) => {if(event)this.goToSlide(index)}}>
+							asdsad
+						</section>
+					)
+				})}
 			</section>
 		)
 	},
