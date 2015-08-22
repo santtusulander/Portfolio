@@ -3,28 +3,26 @@ import page  from 'page';
 
 export default React.createClass({
 	propTypes: {
-		invoker: React.PropTypes.string,
-		items:   React.PropTypes.arr
-	},
-
-	getInitialState() {
-		return {
-			dropDown: false
-		};
+		items:   React.PropTypes.array
 	},
 
 	renderItems() {
-		return this.props.items.map((item) => {
+		return this.props.items.map((item, index) => {
 			return (
-
-				)
-		})
-	}
+				<li key={index} className='dropdown-item' onClick={item.onClick}>
+					{item.title}
+				</li>
+			);
+		});
+	},
 
 	render() {
-		<section>
-			<ul>
-			</ul>
-		</section>
+		return (
+			<section>
+				<ul>
+					{this.renderItems()}
+				</ul>
+			</section>
+		);
 	}
 });

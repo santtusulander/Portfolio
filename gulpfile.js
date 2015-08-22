@@ -1,7 +1,8 @@
-var gulp = require('gulp')
-var fs = require("fs")
-var browserify = require("browserify")
-var babelify = require("babelify")
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var fs = require("fs");
+var browserify = require("browserify");
+var babelify = require("babelify");
 var path = require('path');
 var watchify   = require('watchify');
 var source = require('vinyl-source-stream');
@@ -10,7 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var sync   = require('browser-sync');
 var args = require('minimist')(process.argv);
 var envify     = require('envify');
-
+var server = require('gulp-webserver');
 var mode = args['test-runner-mode'] === 'watch' ? 'watch' : 'run';
 
 // We need to setup browserify. For regular builds we use 'browserify' by
@@ -28,7 +29,7 @@ if(args['use-watchify']) {
 }
 bundler = bundler.transform(envify).transform(babelify);
 
-gulp.task('build',function(){
+function bundle(){
  	var stream = bundler.bundle().pipe(source('app.js'));
 
 		stream = stream.pipe(buffer())
@@ -42,4 +43,18 @@ gulp.task('build',function(){
 	}
 
 	return stream;
+}
+
+gulp.task('build-js', bundle);
+
+gulp.task('build-css', function () {
+  return gulp.src('./styles/app.scss')
+    .pipe(sass({
+    	includePaths: require('node-bourbon').includePaths,
+    	indentedSyntax: true,
+    	errLogToConsole: true
+    }).on('error', sass.logError))
+    .pipe(gulp.dest('dist'));
 });
+
+gulp.task('build', ['build-css', 'build-js']);

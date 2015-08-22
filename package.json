@@ -1,23 +1,26 @@
 {
-  "name": "node-api",
+  "name": "node-client",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/scotch-io/node-token-authentication"
+    "url": "git://github.com/santtusulander/portfolio"
   },
   "scripts": {
     "test": "gulp test",
     "start": "gulp build",
     "build": "gulp build && babel-node lib/server.js"
   },
-  "author": "Chris Sevilleja <scotch.io>",
+  "author": "Santtu Sulander",
   "license": "MIT",
   "dependencies": {
     "express": "~4.13.3",
     "body-parser": "~1.0.1",
     "babel": "~5.8.21",
     "react": "~0.13.3",
-    "babel-core": "~5.8.21"
+    "babel-core": "~5.8.21",
+    "node-bourbon": "~4.2.3",
+    "flux": "~2.1.1",
+    "event-emitter": "~0.3.3"
   },
   "devDependencies": {
     "babel-core": "~5.8.21",
@@ -26,6 +29,7 @@
     "browserify": "~11.0.1",
     "babelify": "~6.1.3",
     "gulp": "~3.9.0",
-    "watchify": "~3.3.1"
+    "watchify": "~3.3.1",
+    "node-bourbon": "~4.2.3"
   }
 }

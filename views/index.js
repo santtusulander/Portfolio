@@ -1,17 +1,47 @@
 import React from 'react';
 import page  from 'page';
+
 import Navigation from '../components/navigation';
+import Carousel   from '../components/carousel';
 
 export default React.createClass({
-	componentWillMount(){
-		console.log('juuh elicks')
-	},
 
 	render(){
+		let slides=[
+			{
+				className: 'slide',
+				content: 'eka',
+				style: {
+
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'jaa',
+				style: {
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'jaa',
+				style: {
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'vika',
+				style: {
+
+				}
+			}
+		]
 		return (
 			<div>
-				<button onClick={() => {page.show('/works');}}/>
 				<Navigation view='index'/>
+				<Carousel slides={slides} />
 			</div>
 		);
 	}
