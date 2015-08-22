@@ -5,7 +5,10 @@ import Action          from '../actions';
  *
  */
 export default flux.actionCreator({
-	moveSlide(slideIndex) {
-		this.dispatch(Action.Carousel.Move, slideIndex);
+	moveToSlide(slideIndex) {
+		this.dispatch(Action.Carousel.MoveTo, slideIndex);
+	},
+	moveCarousel(direction) {
+		this.dispatch(Action.Carousel.Move, direction);
 	}
 });
