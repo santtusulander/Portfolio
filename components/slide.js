@@ -21,8 +21,8 @@ export default React.createClass({
 		return {left: 0};
 	},
 
-	//Playing around with this, I noticed that the dynamics of the slide movement
-	//can be easily configured to preference.
+	//The dynamics of the slide movement
+	//can easily be configured to preference.
 	getEndValue() {
 		let slideCalled = CarouselStore.getSlide();
 		let greaterThan	=
@@ -50,21 +50,13 @@ export default React.createClass({
 		})
 	},
 
-	handleClick() {
-		this.tweenState('left', {
-			easing: tweenState.easingTypes.easeInOutQuad,
-			duration: 600,
-			endValue: this.state.left + React.findDOMNode(this).offsetWidth
-		});
-	},
-
 	render() {
 		let position = {
 			position: 'absolute',
 			left: this.getTweeningValue('left')
 		};
 		return (
-			<section ref={this.props.index} onClick={this.handleClick} key={this.props.index}
+			<section ref={this.props.index} key={this.props.index}
 				className={this.props.slide.className} style={position}>
 				{this.props.slide.content}
 			</section>

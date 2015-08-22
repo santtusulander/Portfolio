@@ -20,12 +20,13 @@ export default React.createClass({
 	renderSlides() {
 		return this.props.slides.map((item, index) => {
 			return (
-				<Slide index={index} ref='slide' slide={item}/>
+				<Slide ref='slide' index={index} key={index} slide={item}/>
 			)
 		})
 	},
 
 	componentDidMount() {
+		console.log(React.findDOMNode(this.refs.slide).style.left)
 		this.setState({
 			wrapperHeight: React.findDOMNode(this.refs.slide).offsetHeight
 		});
