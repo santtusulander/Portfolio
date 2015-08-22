@@ -2,6 +2,10 @@ import React       from 'react';
 import page        from 'page';
 import tweenState  from 'react-tween-state';
 
+import CarouselAction from '../actions/carousel' 
+
+import Slide from './slide';
+
 export default React.createClass({
 	mixins: [tweenState.Mixin],
 
@@ -13,32 +17,22 @@ export default React.createClass({
 		return {left: 0, wrapperHeight: 0};
 	},
 
-	handleClick() {
-	    this.tweenState('left', {
-	      easing: tweenState.easingTypes.easeInOutQuad,
-	      duration: 600,
-	      endValue: this.state.left + React.findDOMNode(this.refs[0]).offsetWidth
-	    });
-	},
-
 	renderSlides() {
 		return this.props.slides.map((item, index) => {
 			return (
-				<section ref={index} key={index} className={item.className}>
-					{item.content}
-				</section>
+				<Slide index={index} ref='slide' slide={item}/>
 			)
 		})
 	},
 
 	componentDidMount() {
 		this.setState({
-			wrapperHeight: React.findDOMNode(this.refs.wrapper).offsetHeight
+			wrapperHeight: React.findDOMNode(this.refs.slide).offsetHeight
 		});
 	},
 
-	goToSlide(ref) {
-		console.log(this.state.left)
+	goToSlide(index) {
+		CarouselAction.moveSlide(index);
 	},
 
 	//This is so hacky it's almost revolting. But since with the current setup
@@ -69,10 +63,7 @@ export default React.createClass({
 		};
 		return (
 			<section className='carousel-window'>
-				<section className='carousel-wrapper' ref='wrapper'
-					style={style} onClick={this.handleClick}>
 					{this.renderSlides()}
-				</section>
 				{this.renderNavigation()}
 			</section>
 		);
