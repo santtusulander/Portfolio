@@ -10,15 +10,7 @@ export default React.createClass({
 		let slides=[
 			{
 				className: 'slide',
-				content: 'juu',
-				style: {
-
-
-				}
-			},
-			{
-				className: 'slide',
-				content: 'ei',
+				content: 'eka',
 				style: {
 
 
@@ -27,6 +19,20 @@ export default React.createClass({
 			{
 				className: 'slide',
 				content: 'jaa',
+				style: {
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'jaa',
+				style: {
+
+				}
+			},
+			{
+				className: 'slide',
+				content: 'vika',
 				style: {
 
 				}

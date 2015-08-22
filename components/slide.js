@@ -6,9 +6,8 @@ import CarouselStore from '../stores/carousel';
 
 
 /**
-* So... ended up doing this using a flux pattern... I feel it's a bit overkill and
-* could've been handled with pure react but, for the sake of practice
-* I guess it's ok. The look of the implementation however, not so much.
+* Could've been done with pure React
+* but used flux for the sake of exercise and spagetti.
 */
 export default React.createClass({
 	mixins: [tweenState.Mixin],
@@ -22,12 +21,14 @@ export default React.createClass({
 		return {left: 0};
 	},
 
+	//Playing around with this, I noticed that the dynamics of the slide movement
+	//can be easily configured to preference.
 	getEndValue() {
 		let slideCalled = CarouselStore.getSlide();
 		let greaterThan	=
 			(this.props.index - slideCalled) * React.findDOMNode(this).offsetWidth;
 		let lesserThan	=
-			slideCalled - this.props.index * React.findDOMNode(this).offsetWidth;
+			-(slideCalled - this.props.index) * React.findDOMNode(this).offsetWidth;
 		return this.props.index === slideCalled ? 0
 			: this.props.index < slideCalled ? lesserThan : greaterThan;
 	},
