@@ -1,7 +1,8 @@
-@mixin rectangle($width, $height, $color: '', $radius: '')
-	width: $width;
-	height: $height;
+@mixin rectangle($diameter, $margin, $color: '', $radius: '')
+	width:  $diameter
+	height: $diameter
+	margin-right: $margin
 	@if($color != '')
-		background-color: $color;
+		background-color: $color
 	@if($radius != '')
 		border-radius: $radius

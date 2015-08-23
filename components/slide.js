@@ -75,12 +75,11 @@ export default React.createClass({
 
 	render() {
 		let position = {
-			position: 'absolute',
 			left: this.getTweeningValue('left')
 		};
 		return (
 			<section ref={this.props.index} key={this.props.index}
-				className={this.props.slide.className} style={position}>
+				className='slide' style={position}>
 				{this.props.slide.content}
 			</section>
 		)

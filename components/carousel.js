@@ -17,7 +17,7 @@ export default React.createClass({
 	},
 
 	getInitialState() {
-		return { left: 0, wrapperHeight: 0, currentSlide: 0 };
+		return { left: 0, slideHeight: 0, currentSlide: 0 };
 	},
 
 	renderSlides() {
@@ -32,13 +32,15 @@ export default React.createClass({
 		SlideStore.addChangeListener(() => {
 			if(this.state.currentSlide !== SlideStore.getSlide().index) {
 				this.setState({
-					currentSlide: SlideStore.getSlide().index
+					currentSlide: SlideStore.getSlide().index,
+					slideHeight:  SlideStore.getSlide().element.clientHeight
 				});
 			}
 		});
-		this.setState({
-			wrapperHeight: React.findDOMNode(this.refs.slide).offsetHeight
-		});
+		console.log(SlideStore.getSlide())
+		/*this.setState({
+			slideHeight:  SlideStore.getSlide().element.clientHeight
+		});*/
 	},
 
 	move(direction) {
@@ -46,7 +48,7 @@ export default React.createClass({
 	},
 
 	goToSlide(index) {
-		CarouselAction.moveToSlide(index);
+		CarouselAction.moveToSlide(index, this.state.currentSlide);
 	},
 
 	//This is so hacky it's almost revolting. But since with the current setup
@@ -54,26 +56,10 @@ export default React.createClass({
 	//with fixing it, this will suffice.
 	renderNavigation(){
 		let wrapperStyle = {
-			paddingTop: `${this.state.wrapperHeight + 2}px` 
+			paddingTop: `${this.state.slideHeight + 2}px` 
 		};
-		let nextClasses = classnames({
-			nextprev: true,
-			hidden: this.state.currentSlide === this.props.slides.length - 1
-		});
-		let prevClasses = classnames({
-			nextprev: true,
-			hidden: this.state.currentSlide === 0
-		});
 		return (
 			<section className='navigation-wrapper' style={wrapperStyle}>
-				<section onClick={(event) => {if(event)this.move('next')}}
-					className={nextClasses}>
-					next
-				</section>
-				<section onClick={(event) => {if(event)this.move('prev')}}
-					className={prevClasses}>
-					previous
-				</section>
 				{this.props.slides.map((item, index) => {
 					let navClasses = classnames({
 						carouselNavigator: true,
@@ -90,12 +76,24 @@ export default React.createClass({
 	},
 
 	render() {
-		 let style = {
-			position: 'absolute',
-			left: this.getTweeningValue('left')
-		};
+		let nextClasses = classnames({
+			next: true,
+			hidden: this.state.currentSlide === this.props.slides.length - 1
+		});
+		let prevClasses = classnames({
+			prev: true,
+			hidden: this.state.currentSlide === 0
+		});
 		return (
 			<section className='carousel-window'>
+				<section onClick={(event) => {if(event)this.move('next')}}
+					className={nextClasses}>
+					next
+				</section>
+				<section onClick={(event) => {if(event)this.move('prev')}}
+					className={prevClasses}>
+					previous
+				</section>
 					{this.renderSlides()}
 				{this.renderNavigation()}
 			</section>
