@@ -23,7 +23,7 @@ export default React.createClass({
 	renderSlides() {
 		return this.props.slides.map((item, index) => {
 			return (
-				<Slide ref='slide' index={index} key={index} slide={item}/>
+				<Slide setHeight={this.setInitialSlideHight} ref='slide' index={index} key={index} slide={item}/>
 			)
 		});
 	},
@@ -37,10 +37,6 @@ export default React.createClass({
 				});
 			}
 		});
-		console.log(SlideStore.getSlide())
-		/*this.setState({
-			slideHeight:  SlideStore.getSlide().element.clientHeight
-		});*/
 	},
 
 	move(direction) {
@@ -49,6 +45,12 @@ export default React.createClass({
 
 	goToSlide(index) {
 		CarouselAction.moveToSlide(index, this.state.currentSlide);
+	},
+
+	setInitialSlideHight(height) {
+		this.setState({
+			slideHeight: height
+		})
 	},
 
 	//This is so hacky it's almost revolting. But since with the current setup
@@ -76,6 +78,7 @@ export default React.createClass({
 	},
 
 	render() {
+		console.log('car')
 		let nextClasses = classnames({
 			next: true,
 			hidden: this.state.currentSlide === this.props.slides.length - 1
