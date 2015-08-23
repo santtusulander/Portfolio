@@ -8,7 +8,10 @@
 	background-color: #FFFFFF
 	text-align: center
 
-	.carousel-navigator
+	.carouselNavigator
+		@include rectangle(14px, 14px, #264026, 10px)
+		&.active
+			@include rectangle(16px, 16px, #159715, 10px)
 
 .slide
 	background-color: #a812b9

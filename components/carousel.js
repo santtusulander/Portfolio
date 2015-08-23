@@ -75,10 +75,13 @@ export default React.createClass({
 					previous
 				</section>
 				{this.props.slides.map((item, index) => {
+					let navClasses = classnames({
+						carouselNavigator: true,
+						active : this.state.currentSlide === index
+					})
 					return (
-						<section key={index} className='carousel-navigator'
+						<section key={index} className={navClasses}
 							onClick={(event) => {if(event)this.goToSlide(index)}}>
-							asdsad
 						</section>
 					)
 				})}
