@@ -76,7 +76,6 @@ export default React.createClass({
 	},
 
 	render() {
-		console.log('asd')
 		let position = {
 			left: this.getTweeningValue('left')
 		};

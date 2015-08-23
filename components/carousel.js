@@ -78,7 +78,6 @@ export default React.createClass({
 	},
 
 	render() {
-		console.log('car')
 		let nextClasses = classnames({
 			next: true,
 			hidden: this.state.currentSlide === this.props.slides.length - 1
