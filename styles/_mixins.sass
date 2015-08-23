@@ -1,0 +1,8 @@
+@mixin rectangle($diameter, $margin, $color: '', $radius: '')
+	width:  $diameter
+	height: $diameter
+	margin-right: $margin
+	@if($color != '')
+		background-color: $color
+	@if($radius != '')
+		border-radius: $radius

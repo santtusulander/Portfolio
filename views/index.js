@@ -9,33 +9,17 @@ export default React.createClass({
 	render(){
 		let slides=[
 			{
-				className: 'slide',
-				content: 'eka',
-				style: {
-
-
-				}
+				content: <img style={{width: 100 + '%'}}
+				src="http://oppiminen.yle.fi/sites/oppiminen.yle.fi/files/images/siili_kuva_risto_salovaara.jpg"/>
 			},
 			{
-				className: 'slide',
-				content: 'jaa',
-				style: {
-
-				}
+				content: 'jaa'
 			},
 			{
-				className: 'slide',
-				content: 'jaa',
-				style: {
-
-				}
+				content: 'jaa'
 			},
 			{
-				className: 'slide',
-				content: 'vika',
-				style: {
-
-				}
+				content: 'vika'
 			}
 		]
 		return (
