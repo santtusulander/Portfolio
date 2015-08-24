@@ -18,7 +18,6 @@ export default React.createClass({
 	propTypes: {
 		slide:        React.PropTypes.object,
 		index:        React.PropTypes.number,
-		setHeight:    React.PropTypes.func
 	},
 
 	getInitialState() {
@@ -68,7 +67,6 @@ export default React.createClass({
 	//A bit hackish here... triggering a render immediately after
 	//mounting the component in order to set the initial position of the slides
 	componentDidMount() {
-		if(this.props.index === 0) this.props.setHeight(React.findDOMNode(this).offsetHeight);
 		CarouselStore.addChangeListener(this.onChange);
 		this.setState({
 			left: this.props.index * React.findDOMNode(this).offsetWidth

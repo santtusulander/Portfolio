@@ -17,51 +17,47 @@ export default React.createClass({
 	},
 
 	getInitialState() {
-		return { left: 0, slideHeight: 0, currentSlide: 0 };
+		return { left: 0, windowHeight: 0, currentSlide: 0 };
 	},
 
 	renderSlides() {
 		return this.props.slides.map((item, index) => {
 			return (
-				<Slide setHeight={this.setInitialSlideHight} ref='slide' index={index} key={index} slide={item}/>
+				<Slide ref='slide' index={index} key={index} slide={item}/>
 			)
 		});
 	},
 
 	componentDidMount() {
+		this.setState({
+			windowHeight: React.findDOMNode(this.refs.window).offsetHeight
+		});
 		SlideStore.addChangeListener(() => {
 			if(this.state.currentSlide !== SlideStore.getSlide().index) {
 				this.setState({
-					currentSlide: SlideStore.getSlide().index,
-					slideHeight:  SlideStore.getSlide().element.clientHeight
+					currentSlide: SlideStore.getSlide().index
 				});
 			}
 		});
 	},
 
 	move(direction) {
-		CarouselAction.moveCarousel(direction)
+		let lastSlide = this.props.slides.length - 1;
+		if(this.state.currentSlide === lastSlide && direction === "next")
+			CarouselAction.moveToSlide(0, this.state.currentSlide);
+		else if(this.state.currentSlide === 0 && direction === "prev")
+			CarouselAction.moveToSlide(lastSlide, this.state.currentSlide);
+		else CarouselAction.moveCarousel(direction);
 	},
 
 	goToSlide(index) {
 		CarouselAction.moveToSlide(index, this.state.currentSlide);
 	},
 
-	setInitialSlideHight(height) {
-		this.setState({
-			slideHeight: height
-		})
-	},
-
-	//This is so hacky it's almost revolting. But since with the current setup
-	//the carousel's position needs to be absolute and I can't be bothered
-	//with fixing it, this will suffice.
 	renderNavigation(){
-		let wrapperStyle = {
-			paddingTop: `${this.state.slideHeight + 2}px` 
-		};
 		return (
-			<section className='navigation-wrapper' style={wrapperStyle}>
+			<section className='navigation-wrapper'
+				style={{marginTop: this.state.windowHeight * 0.9}}>
 				{this.props.slides.map((item, index) => {
 					let navClasses = classnames({
 						carouselNavigator: true,
@@ -78,24 +74,15 @@ export default React.createClass({
 	},
 
 	render() {
-		let nextClasses = classnames({
-			next: true,
-			hidden: this.state.currentSlide === this.props.slides.length - 1
-		});
-		let prevClasses = classnames({
-			prev: true,
-			hidden: this.state.currentSlide === 0
-		});
+		let navPosition = {
+			marginTop: this.state.windowHeight * 0.45
+		}
 		return (
-			<section className='carousel-window'>
+			<section ref='window' className='carousel-window'>
 				<section onClick={(event) => {if(event)this.move('next')}}
-					className={nextClasses}>
-					next
-				</section>
+					className='fa fa-arrow-right next' style={navPosition} />
 				<section onClick={(event) => {if(event)this.move('prev')}}
-					className={prevClasses}>
-					previous
-				</section>
+					className='fa fa-arrow-left prev' style={navPosition} />
 					{this.renderSlides()}
 				{this.renderNavigation()}
 			</section>
