@@ -1,28 +1,41 @@
 .carousel-window
 	width: 100%
 	text-align: center
+	position: relative
+	overflow-x: hidden
+	height: 350
+	font-size: 2em
+	color: rgba(255, 215, 21, 0.63)
 
 .navigation-wrapper
-	background-color: #FFFFFF
+	z-index: 2
 	display: inline-flex
+	position: relative
 
 	.carouselNavigator
-		@include rectangle(14px, 5px, #264026, 10px)
+		@include rectangle(16, 4, rgba(255, 215, 21, 0.28), 10px)
 
 		&.active
-			@include rectangle(16px, 5px, #159715, 10px)
+			@include rectangle(18, 4, #FDEA01, 10px)
 
+	
 .prev
 	position: absolute
+	margin-left: 8
+	display: flex !important
 	z-index: 2
+
 .next
+	margin-right: 8
 	position: relative
 	float: right
 	z-index: 2
+
 .slide
 	position: absolute
-	background-color: #a812b9
-	width: 100vw
+	background-color: rgba(0, 0, 0, 0.89)
+	width: 100%
+	height: 100%
 	z-index: 1
 
 .hidden

@@ -4,7 +4,7 @@ import Action from '../actions';
 /**
  *
  */
-let slide = null;
+let slide = 0;
 export default flux.store({
 	getSlide() {
 		return slide
