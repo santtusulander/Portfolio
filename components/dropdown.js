@@ -18,11 +18,9 @@ export default React.createClass({
 
 	render() {
 		return (
-			<section>
-				<ul>
+				<ul className='dropdown-list'>
 					{this.renderItems()}
 				</ul>
-			</section>
 		);
 	}
 });

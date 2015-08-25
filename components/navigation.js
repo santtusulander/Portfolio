@@ -1,5 +1,6 @@
-import React from 'react';
-import page  from 'page';
+import React      from 'react';
+import page       from 'page';
+import classnames from 'classnames';
 
 import Dropdown from './dropdown';
 
@@ -57,8 +58,12 @@ export default React.createClass({
 	renderLinks(links) {
 		let linkArray = [];
 		for (let link in links) {
+			let classNames = classnames({
+				dropdownLink: true,
+				linkActive: link === this.state.dropDownInvoker
+			});
 			linkArray.push(
-				<li key={link} id={link} className='dropdown-link'
+				<li key={link} id={link} className={classNames}
 					onClick={(event) => { if(event)this.toggleDropdown(link)} }>
 					{link}
 					{this.renderDropdown(link)}
@@ -66,7 +71,7 @@ export default React.createClass({
 			)
 		}
 		return (
-			<ul>
+			<ul className='dropdown-headers'>
 				{linkArray}
 			</ul>
 		);
