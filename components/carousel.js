@@ -13,7 +13,8 @@ export default React.createClass({
 	mixins: [tweenState.Mixin],
 
 	propTypes: {
-		class:  React.PropTypes.string
+		class:      React.PropTypes.string,
+		navVisible: React.PropTypes.bool
 	},
 
 	getInitialState() {
@@ -60,7 +61,7 @@ export default React.createClass({
 	},
 
 	renderNavigation(){
-		return (
+		return this.props.navVisible ? (
 			<section className='navigation-wrapper'>
 				{this.props.children.map((item, index) => {
 					let navClasses = classnames({
@@ -74,17 +75,22 @@ export default React.createClass({
 					)
 				})}
 			</section>
-		)
+		) : null
 	},
 
 	render() {
+		let prevArrow = this.props.navVisible ?
+			<section onClick={(event) => {if(event)this.move('prev')}} className='fa fa-arrow-left prev' />
+			: null;
+		let nextArrow = this.props.navVisible ?
+			<section onClick={(event) => {if(event)this.move('next')}}className='fa fa-arrow-right next' />
+			: null;
+
 		return (
 			<section ref='window' className={this.props.class}>
-				<section onClick={(event) => {if(event)this.move('next')}}
-					className='fa fa-arrow-right next' />
-				<section onClick={(event) => {if(event)this.move('prev')}}
-					className='fa fa-arrow-left prev' />
-					{this.renderSlides()}
+				{prevArrow}
+				{nextArrow}
+				{this.renderSlides()}
 				{this.renderNavigation()}
 			</section>
 		);

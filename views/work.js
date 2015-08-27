@@ -10,12 +10,16 @@ export default React.createClass({
 		work: React.PropTypes.string
 	},
 
-	render(){
+	move() {
+		this.refs.carousel.move('next');
+	},
+
+	render() {
 		return (
 			<div>
 				<Navigation view='index'/>
-				<Carousel class='work-view'>
-					<section className="title-view">
+				<Carousel navVisible={false} class='work-view' ref='carousel'>
+					<section className='title-view' onClick={this.move}>
 						{this.props.work}
 					</section>
 					<section>

@@ -9,7 +9,7 @@ export default React.createClass({
 		return (
 			<div>
 				<Navigation view='index'/>
-				<Carousel class='carousel-window'>
+				<Carousel navVisible={true} class='carousel-window'>
 				<div style={{width: 40 + '%', border: '1px solid', margin: 'auto',
 					marginTop: 8 + '%', fontSize: 0.5 + 'em', padding: 10}}>
 						The Magnificent
