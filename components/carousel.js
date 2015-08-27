@@ -1,4 +1,4 @@
-import React       from 'react';
+import React       from 'react/addons';
 import page        from 'page';
 import tweenState  from 'react-tween-state';
 import classnames  from 'classnames';
@@ -13,36 +13,41 @@ export default React.createClass({
 	mixins: [tweenState.Mixin],
 
 	propTypes: {
-		slides:   React.PropTypes.array
+		class:  React.PropTypes.string
 	},
 
 	getInitialState() {
-		return { left: 0, windowHeight: 0, currentSlide: 0 };
+		return { left: 0, currentSlide: 0 };
 	},
 
 	renderSlides() {
-		return this.props.slides.map((item, index) => {
+		return this.props.children.map((item, index) => {
 			return (
-				<Slide ref='slide' index={index} key={index} slide={item}/>
+				<Slide ref='slide' index={index} key={index}>
+					{item}
+				</Slide>
 			)
 		});
 	},
 
+	componentWillUnmount() {
+		SlideStore.removeChangeListener(this.onChange)
+	},
+
+	onChange() {
+		if(this.state.currentSlide !== SlideStore.getSlide().index) {
+			this.setState({
+				currentSlide: SlideStore.getSlide().index
+			});
+		}
+	},
+
 	componentDidMount() {
-		this.setState({
-			windowHeight: React.findDOMNode(this.refs.window).offsetHeight
-		});
-		SlideStore.addChangeListener(() => {
-			if(this.state.currentSlide !== SlideStore.getSlide().index) {
-				this.setState({
-					currentSlide: SlideStore.getSlide().index
-				});
-			}
-		});
+		SlideStore.addChangeListener(this.onChange);
 	},
 
 	move(direction) {
-		let lastSlide = this.props.slides.length - 1;
+		let lastSlide = this.props.children.length - 1;
 		if(this.state.currentSlide === lastSlide && direction === "next")
 			CarouselAction.moveToSlide(0, this.state.currentSlide);
 		else if(this.state.currentSlide === 0 && direction === "prev")
@@ -56,9 +61,8 @@ export default React.createClass({
 
 	renderNavigation(){
 		return (
-			<section className='navigation-wrapper'
-				style={{marginTop: this.state.windowHeight * 0.9}}>
-				{this.props.slides.map((item, index) => {
+			<section className='navigation-wrapper'>
+				{this.props.children.map((item, index) => {
 					let navClasses = classnames({
 						carouselNavigator: true,
 						active : this.state.currentSlide === index
@@ -74,15 +78,12 @@ export default React.createClass({
 	},
 
 	render() {
-		let navPosition = {
-			marginTop: this.state.windowHeight * 0.45
-		}
 		return (
-			<section ref='window' className='carousel-window'>
+			<section ref='window' className={this.props.class}>
 				<section onClick={(event) => {if(event)this.move('next')}}
-					className='fa fa-arrow-right next' style={navPosition} />
+					className='fa fa-arrow-right next' />
 				<section onClick={(event) => {if(event)this.move('prev')}}
-					className='fa fa-arrow-left prev' style={navPosition} />
+					className='fa fa-arrow-left prev' />
 					{this.renderSlides()}
 				{this.renderNavigation()}
 			</section>

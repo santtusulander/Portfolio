@@ -1,28 +1,26 @@
-import React      from 'react';
+import React      from 'react/addons';
 import page       from 'page';
 import classnames from 'classnames';
-
-import Dropdown from './dropdown';
 
 let items = {
 	works : [
 		{
 			title:   'php-application bundle',
-			onClick: () => { page.show('works/php') }
+			onClick: () => { page.show('/works/php') }
 		},
 		{
 			title:   'java-application',
-			onClick: () => { page.show('works/java') }
+			onClick: () => { page.show('/works/java') }
 		}
 	],
 	about : [
 		{
 			title:   'php-application sunder',
-			onClick: () => { page.show('works/php') }
+			onClick: () => { page.show('/works') }
 		},
 		{
 			title:   'java-application',
-			onClick: () => { page.show('works/java') }
+			onClick: () => { page.show('/') }
 		}
 	]
 }
@@ -34,8 +32,12 @@ export default React.createClass({
 
 	getInitialState() {
 		return {
-			dropDownInvoker: ''
+			dropDownInvoker: null
 		};
+	},
+
+	componentWillUnmount() {
+		this.replaceState(this.getInitialState())
 	},
 
 	toggleDropdown(invoker) {
@@ -49,10 +51,17 @@ export default React.createClass({
 		});	
 	},
 
-	renderDropdown(link, sameInvoker) {
+	renderDropdown(link) {
 		return this.state.dropDownInvoker === link ?
-			<Dropdown items={items[this.state.dropDownInvoker]} /> :
-			null;
+			<ul className='dropdown-list'>
+			{items[link].map((item, index) => {
+				return (
+					<li key={index} className='dropdown-item' onClick={item.onClick}>
+						{item.title}
+					</li>
+				);
+			})}
+			</ul> : null;
 	},
 
 	renderLinks(links) {

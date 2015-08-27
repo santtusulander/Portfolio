@@ -10,7 +10,7 @@ import AboutView   from '../views/about';
 //This is not good, needs to be done properly in order for
 //initial routing to work correctly in page reloads etc.
 //In the words of MattiJ, this is a quick hack
-page.redirect('/');
+page.redirect('/works/java');
 
 page('/', () => {
 	return React.render(
@@ -28,7 +28,7 @@ page('/works', () => {
 
 page('/works/:work', (ctx) => {
 	return React.render(
-		<WorkView component={ctx.body.page} work={ctx.params.work}/>,
+		<WorkView work={ctx.params.work}/>,
 		document.getElementById('application')
 	);
 });
