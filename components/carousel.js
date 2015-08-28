@@ -31,6 +31,10 @@ export default React.createClass({
 		});
 	},
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.props !== nextProps || this.state !== nextState
+	},
+
 	componentWillUnmount() {
 		SlideStore.removeChangeListener(this.onChange)
 	},
