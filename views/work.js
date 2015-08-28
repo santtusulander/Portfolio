@@ -12,18 +12,22 @@ import Carousel   from '../components/carousel';
 
 let items = [
 		{
+			stateVar: 'purpose',
 			title:   'Purpose',
 			content: 'asdaaaaa juupajyyyyyyyyy'
 		},
 		{
+			stateVar: 'doneFor',
 			title:   'Done For',
 			content: 'asdaaaaa juupajyyyyyyyyy'
 		},
 		{
+			stateVar: 'doneWith',
 			title:   'Done with',
 			content: 'asdaaaaa juupajyyyyyyyyy'
 		},
 		{
+			stateVar: 'myRole',
 			title:   'My role',
 			content: 'asdaaaaa juupajyyyyyyyyy'
 		}
@@ -36,16 +40,19 @@ export default React.createClass({
 	},
 
 	getInitialState() {
-		return { contentInvoker: null }
+		return items.reduce((state, variable) => {
+			state[variable.stateVar] = false;
+			return state
+		}, {});
 	},
 
 	toggleContent(invoker) {
-		return this.state.contentInvoker === invoker ? this.setState({ contentInvoker: null })
-			: this.setState({ contentInvoker: invoker });
+		return this.state[invoker] === true ? this.setState({ [invoker]: false })
+			: this.setState({ [invoker]: true });
 	},
 
-	renderContent(title, index) {
-		return this.state.contentInvoker === title ?
+	renderContent(item, index) {
+		return this.state[item] === true ?
 			<section className='info-content'>
 				{items[index].content}
 			</section> : null;
@@ -57,10 +64,10 @@ export default React.createClass({
 				return (
 					<li key={index} className='info-item'>
 						<section className='info-title'
-							onClick={(event) => {if(event)this.toggleContent(item.title)}}>
+							onClick={(event) => {if(event)this.toggleContent(item.stateVar)}}>
 								{item.title}
 						</section>
-						{this.renderContent(item.title, index)}
+						{this.renderContent(item.stateVar, index)}
 					</li>
 				);
 			})}
