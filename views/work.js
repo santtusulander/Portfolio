@@ -14,22 +14,22 @@ let items = [
 		{
 			stateVar: 'purpose',
 			title:   'Purpose',
-			content: 'asdaaaaa juupajyyyyyyyyy'
+			content: 'aaaaa jukkajjuuuuuu'
 		},
 		{
 			stateVar: 'doneFor',
 			title:   'Done For',
-			content: 'asdaaaaa juupajyyyyyyyyy'
+			content: 'aaaaa jukkajjuuuuuu'
 		},
 		{
 			stateVar: 'doneWith',
 			title:   'Done with',
-			content: 'asdaaaaa juupajyyyyyyyyy'
+			content: 'aaaaa jukkajjuuuuuu'
 		},
 		{
 			stateVar: 'myRole',
 			title:   'My role',
-			content: 'asdaaaaa juupajyyyyyyyyy'
+			content: 'aaaaa jukkajjuuuuuu'
 		}
 	]
 
@@ -63,11 +63,13 @@ export default React.createClass({
 			{items.map((item, index) => {
 				return (
 					<li key={index} className='info-item'>
-						<section className='info-title'
+						<span className='info-title'
 							onClick={(event) => {if(event)this.toggleContent(item.stateVar)}}>
 								{item.title}
-						</section>
-						{this.renderContent(item.stateVar, index)}
+						</span>
+						<React.addons.CSSTransitionGroup transitionName='content'>
+							{this.renderContent(item.stateVar, index)}
+						</React.addons.CSSTransitionGroup>
 					</li>
 				);
 			})}
@@ -83,8 +85,10 @@ export default React.createClass({
 			<div>
 				<Navigation view='index'/>
 				<Carousel navVisible={false} class='work-view' ref='carousel'>
-					<section className='title-view' onClick={this.move}>
+					<section className='title-view'>
+					<span onClick={this.move} style={{cursor: 'pointer'}}>
 						{this.props.work}
+					</span>
 					</section>
 					{this.renderTitles()}
 				</Carousel>
