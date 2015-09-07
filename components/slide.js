@@ -1,10 +1,9 @@
-import React       from 'react';
+import React       from 'react/addons';
 import page        from 'page';
 import tweenState  from 'react-tween-state';
 
 import CarouselStore  from '../stores/carousel';
 
-import CarouselAction from '../actions/carousel';
 import SlideAction    from '../actions/slide';
 
 
@@ -16,8 +15,7 @@ export default React.createClass({
 	mixins: [tweenState.Mixin],
 
 	propTypes: {
-		slide:        React.PropTypes.object,
-		index:        React.PropTypes.number,
+		index: React.PropTypes.number
 	},
 
 	getInitialState() {
@@ -33,6 +31,10 @@ export default React.createClass({
 			-(slideCalled - this.props.index) * React.findDOMNode(this).offsetWidth;
 		return this.props.index === slideCalled ? 0
 			: this.props.index < slideCalled ? lesserThan : greaterThan;
+	},
+
+	componentWillUnmount() {
+		CarouselStore.removeChangeListener(this.onChange)
 	},
 
 	singleSlideMovement(direction) {
@@ -80,7 +82,7 @@ export default React.createClass({
 		return (
 			<section ref={this.props.index} key={this.props.index}
 				className='slide' style={position}>
-				{this.props.slide.content}
+				{this.props.children}
 			</section>
 		)
 	}

@@ -1,0 +1,43 @@
+.work-view
+	width: 100%
+	text-align: center
+	position: relative
+	overflow-x: hidden
+	min-height: calc(100vh - 25px)
+	font-size: 2em
+	color: rgba(255, 215, 21, 0.63)
+
+.title-view
+	position: relative
+	top: 44%
+
+.worktitle-span
+	@include underline(rgba(255, 175, 70, 0.69))
+	cursor: pointer
+
+.info-list
+	list-style: none
+
+.info-content
+	font-size: 15
+
+.info-item
+	margin-bottom: 100
+
+.info-title
+	@include underline(rgba(255, 175, 70, 0.69))
+	cursor: pointer
+
+.content-leave 
+  opacity: 1
+
+.content-leave.content-leave-active 
+  opacity: 0.01
+  transition: opacity .2s ease-in
+
+.content-enter 
+  opacity: 0.01
+
+.content-enter.content-enter-active 
+  opacity: 1;
+  transition: opacity .2s ease-in
