@@ -7,3 +7,27 @@
 		background-color: $color
 	@if($radius != '')
 		border-radius: $radius
+
+@mixin underline($color)
+
+	position: relative
+	overflow: hidden
+
+	&:before
+		content: ""
+		position: absolute
+		z-index: -1
+		left: 50%
+		right: 50%
+		bottom: 0
+		height: 3px
+		background: $color
+		transition-property: "left, right"
+		transition-duration: .2s
+		transition-timing-function: ease-out
+
+	&:hover
+
+		&:before 
+			left: 0
+			right: 0

@@ -11,6 +11,10 @@
 	position: relative
 	top: 44%
 
+.worktitle-span
+	@include underline(rgba(255, 175, 70, 0.69))
+	cursor: pointer
+
 .info-list
 	list-style: none
 
@@ -21,6 +25,7 @@
 	margin-bottom: 100
 
 .info-title
+	@include underline(rgba(255, 175, 70, 0.69))
 	cursor: pointer
 
 .content-leave 
@@ -28,11 +33,11 @@
 
 .content-leave.content-leave-active 
   opacity: 0.01
-  transition: opacity .5s ease-in
+  transition: opacity .2s ease-in
 
 .content-enter 
   opacity: 0.01
 
 .content-enter.content-enter-active 
   opacity: 1;
-  transition: opacity .5s ease-in
+  transition: opacity .2s ease-in

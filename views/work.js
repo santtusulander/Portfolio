@@ -86,7 +86,7 @@ export default React.createClass({
 				<Navigation view='index'/>
 				<Carousel navVisible={false} class='work-view' ref='carousel'>
 					<section className='title-view'>
-					<span onClick={this.move} style={{cursor: 'pointer'}}>
+					<span onClick={this.move} className='worktitle-span'>
 						{this.props.work}
 					</span>
 					</section>
