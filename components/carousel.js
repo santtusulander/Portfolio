@@ -57,7 +57,8 @@ export default React.createClass({
 			CarouselAction.moveToSlide(0, this.state.currentSlide);
 		else if(this.state.currentSlide === 0 && direction === "prev")
 			CarouselAction.moveToSlide(lastSlide, this.state.currentSlide);
-		else CarouselAction.moveCarousel(direction);
+		else
+			CarouselAction.moveCarousel(direction);
 	},
 
 	goToSlide(index) {
@@ -84,10 +85,14 @@ export default React.createClass({
 
 	render() {
 		let prevArrow = this.props.navVisible ?
-			<section onClick={(event) => {if(event)this.move('prev')}} className='fa fa-arrow-left prev' />
+			<section
+				onClick={(event) => {if(event)this.move('prev')}}
+				className='fa fa-arrow-left fa-3x prev'/>
 			: null;
 		let nextArrow = this.props.navVisible ?
-			<section onClick={(event) => {if(event)this.move('next')}}className='fa fa-arrow-right next' />
+			<section
+				onClick={(event) => {if(event)this.move('next')}}
+				className='fa fa-arrow-right fa-3x next' />
 			: null;
 
 		return (
