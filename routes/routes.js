@@ -2,7 +2,7 @@ import page      from 'page';
 import React     from 'react';
 
 import IndexView   from '../views/';
-import WorkView    from '../views/work';
+import WorkView    from '../views/project-page';
 
 page('/', () => {
 	page.redirect('/basic');

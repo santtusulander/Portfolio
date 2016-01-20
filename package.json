@@ -17,6 +17,7 @@
     "event-emitter": "~0.3.3",
     "express": "~4.13.3",
     "flux": "~2.1.1",
+    "forever": "^0.15.1",
     "lodash.throttle": "~3.0.4",
     "node-bourbon": "~4.2.3",
     "page": "^1.6.4",
