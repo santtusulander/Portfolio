@@ -53,9 +53,15 @@ export default React.createClass({
 
 	move(direction) {
 		let lastSlide = this.props.children.length - 1;
-		if(this.state.currentSlide === lastSlide && direction === "next")
+		if(
+			this.state.currentSlide === lastSlide && 
+			direction === "next"
+		)
 			CarouselAction.moveToSlide(0, this.state.currentSlide);
-		else if(this.state.currentSlide === 0 && direction === "prev")
+		else if(
+			this.state.currentSlide === 0 &&
+			direction === "prev"
+		)
 			CarouselAction.moveToSlide(lastSlide, this.state.currentSlide);
 		else
 			CarouselAction.moveCarousel(direction);
