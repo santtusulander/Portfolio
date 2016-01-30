@@ -21,7 +21,7 @@ watchify.args           = watchify.args || { }
 watchify.args.debug     = process.env.NODE_ENV !== 'production';
 watchify.args.fullPaths = process.env.NODE_ENV !== 'production';
 
-var entry   = path.join(__dirname, 'routes/routes.js');
+var entry   = path.join(__dirname, './routes/routes.js');
 var bundler = browserify(entry, watchify.args);
 
 if(args['use-watchify']) {

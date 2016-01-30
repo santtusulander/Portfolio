@@ -1,0 +1,46 @@
+.work-view
+	width: 100%
+	text-align: center
+	position: relative
+	overflow-x: hidden
+	min-height: calc(100vh - 25px)
+	font-family: monospace
+	font-size: 44px
+
+.title-view
+	position: relative
+	top: 44%
+
+.worktitle-span
+	@include underline(#FF794F)
+	cursor: pointer
+
+.info-list
+	margin-top: 10%
+	list-style: none
+
+.info-content
+	font-size: 17
+	margin: auto
+	max-width: 35%
+
+.info-item
+	margin-bottom: 100
+
+.info-title
+	@include underline(#FF794F)
+	cursor: pointer
+
+.content-leave 
+  opacity: 1
+
+.content-leave.content-leave-active 
+  opacity: 0.01
+  transition: opacity .2s ease-in
+
+.content-enter 
+  opacity: 0.01
+
+.content-enter.content-enter-active 
+  opacity: 1;
+  transition: opacity .2s ease-in
