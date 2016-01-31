@@ -5,7 +5,7 @@ import classnames  from 'classnames';
 
 import SlideStore  from '../stores/slide';
 
-import CarouselAction from '../actions/carousel' 
+import CarouselAction from '../actions/carousel'
 
 import Slide from './slide';
 
@@ -54,7 +54,7 @@ export default React.createClass({
 	move(direction) {
 		let lastSlide = this.props.children.length - 1;
 		if(
-			this.state.currentSlide === lastSlide && 
+			this.state.currentSlide === lastSlide &&
 			direction === "next"
 		)
 			CarouselAction.moveToSlide(0, this.state.currentSlide);

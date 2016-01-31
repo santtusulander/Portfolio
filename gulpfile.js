@@ -8,10 +8,10 @@ var buffer = require('vinyl-buffer');
 var sourcemaps = require('gulp-sourcemaps');
 
 
-var entry   = path.join(__dirname, './routes/routes.js');
+var entry   = path.join(__dirname, './routes.js');
 var bundler = browserify(entry);
 
-bundler = bundler.transform(babelify, {presets: ["es2015", "react"]});
+bundler = bundler.transform(babelify);
 
 function bundle(){
  	var stream = bundler.bundle().pipe(source('app.js'));
